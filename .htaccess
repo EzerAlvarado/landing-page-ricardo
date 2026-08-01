@@ -1,0 +1,7 @@
+AddType video/mp4 .mp4
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(mp4|webm)$">
+    Header set Accept-Ranges bytes
+  </FilesMatch>
+</IfModule>

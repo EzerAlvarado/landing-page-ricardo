@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ricardo Diaz · Asesor Financiero — Planes de Retiro</title>
+  <meta name="description" content="Asesoría financiera personalizada en planes de retiro, inversiones y ahorro patrimonial. Ricardo Diaz, tu asesor financiero de confianza." />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero" id="inicio">
+    <div class="hero-inner">
+      <div class="hero-badges">
+        <span class="hero-badge">✓ Plan de retiro · ✓ Sin requisitos de salud</span>
+        <span class="hero-badge hero-badge-dark">PLAN DE RETIRO · MÉXICO</span>
+      </div>
+      <h1>
+        <span class="headline-line">Construye tu retiro de</span>
+        <span class="headline-line">forma</span>
+        <span class="headline-line headline-accent">segura y sin riesgos</span>
+      </h1>
+      <p class="lead">
+        Ahorra para tu futuro de manera cómoda, flexible y sin riesgos, con beneficios
+        fiscales y acceso a tu capital cuando lo necesites.
+      </p>
+      <a href="#contacto" class="btn btn-primary">Quiero conocer mi plan →</a>
+      <div class="hero-stats">
+        <div class="stat">
+          <strong>20</strong>
+          <span>Años de experiencia</span>
+        </div>
+        <div class="stat">
+          <strong>+2,000</strong>
+          <span>Familias asesoradas</span>
+        </div>
+        <div class="stat">
+          <strong>100%</strong>
+          <span>Estrategias personalizadas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulario -->
+  <section class="form-section" id="contacto">
+    <div class="container form-section-inner">
+      <div id="form-intro" class="form-header">
+        <span class="form-pill">AGENDA TU CONSULTA</span>
+        <h2>Completa el formulario y te contacto hoy</h2>
+        <p>Déjame tus datos y me comunico contigo a la brevedad para diseñar tu plan.</p>
+        <div class="form-divider"></div>
+      </div>
+
+      <div class="hero-form">
+        <form id="lead-form" novalidate>
+          <label class="field-label">
+            <span class="label-text">Nombre completo <span class="req">*</span></span>
+            <input type="text" name="nombre" placeholder="Tu nombre" required
+                   minlength="3" maxlength="60" autocomplete="name" />
+            <span class="field-error" data-error-for="nombre"></span>
+          </label>
+
+          <label class="field-label">
+            <span class="label-text">WhatsApp <span class="req">*</span></span>
+            <div class="phone-wrap">
+              <span class="phone-prefix">🇲🇽 +52</span>
+              <input type="tel" name="telefono" placeholder="Para contactarte" required
+                     inputmode="numeric" maxlength="14" autocomplete="tel" />
+            </div>
+            <span class="field-error" data-error-for="telefono"></span>
+          </label>
+
+          <fieldset class="radio-group" data-field="edad">
+            <legend>Confirma tu edad</legend>
+            <div class="radio-options">
+              <label class="radio-label">
+                <input type="radio" name="edad" value="Entre 30 y 45 años" />
+                <span>Entre 30 y 45 años</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="edad" value="Más de 45 años" />
+                <span>Más de 45 años</span>
+              </label>
+            </div>
+            <span class="field-error" data-error-for="edad"></span>
+          </fieldset>
+
+          <fieldset class="radio-group" data-field="ahorro">
+            <legend>¿Cuentas con capacidad de ahorro?</legend>
+            <div class="radio-options">
+              <label class="radio-label">
+                <input type="radio" name="ahorro" value="Sí" />
+                <span>Sí</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="ahorro" value="No" />
+                <span>No</span>
+              </label>
+            </div>
+            <span class="field-error" data-error-for="ahorro"></span>
+          </fieldset>
+
+          <button type="submit" class="btn btn-submit btn-full">Cotizar mi plan de retiro</button>
+        </form>
+
+        <p class="form-footer-badges">✓ Para personas con ingresos constantes · ✓ Sin requisitos de salud · ✓ 100% confidencial</p>
+
+        <div class="form-success" id="form-success" hidden>
+          <span class="success-icon">✓</span>
+          <h3>¡Enviado!</h3>
+          <p>Recibimos tus datos correctamente.<br />Pronto nos pondremos en contacto contigo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mira antes de decidir -->
+  <section class="section section-white" id="informacion">
+    <div class="container section-centered">
+      <span class="section-pill">MIRA ANTES DE DECIDIR</span>
+      <h2 class="section-title">Entiende en minutos cómo <em>proteger tu futuro</em></h2>
+      <p class="section-subtitle">
+        Sin tecnicismos, sin presiones. La información que necesitas para tomar
+        una decisión inteligente sobre tu plan de retiro y ahorro patrimonial.
+      </p>
+      <div class="section-divider"></div>
+      <div class="video-placeholder" id="video-container">
+        <video controls playsinline preload="auto" title="Video explicativo — Plan de retiro">
+          <source src="assets/video.mp4" type="video/mp4" />
+          Tu navegador no soporta la reproducción de video.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ¿Esto es para ti? -->
+  <section class="section section-white" id="para-ti">
+    <div class="container section-centered">
+      <span class="section-pill">¿ESTO ES PARA TI?</span>
+      <h2 class="section-title">Pensado para personas que…</h2>
+      <div class="section-divider"></div>
+      <div class="cards-3">
+        <article class="card pain-card">
+          <span class="card-icon-box">⏳</span>
+          <p>Les preocupa <strong>no tener dinero suficiente</strong> al llegar a la edad de retiro y depender de otros.</p>
+        </article>
+        <article class="card pain-card">
+          <span class="card-icon-box">🎯</span>
+          <p>Buscan un <strong>plan personal para su retiro</strong> y no saben cómo empezar a construirlo según su edad, ingresos y metas.</p>
+        </article>
+        <article class="card pain-card">
+          <span class="card-icon-box">📈</span>
+          <p>Buscan que <strong>su dinero trabaje para ellos</strong>, en lugar de guardarlo donde pierde valor.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beneficios -->
+  <section class="section section-benefits" id="beneficios">
+    <div class="container section-centered">
+      <span class="section-pill section-pill-dark">QUÉ OBTIENES</span>
+      <h2 class="section-title light">Beneficios de trabajar con un asesor financiero</h2>
+      <p class="section-subtitle light">
+        Una estrategia integral que combina protección, ahorro e inversión,
+        diseñada a la medida de tus metas y tu presupuesto.
+      </p>
+      <div class="section-divider"></div>
+      <div class="benefit-cards">
+        <article class="benefit-card">
+          <span class="card-icon-box card-icon-box-dark">📈</span>
+          <h3>Tu dinero crece con el tiempo</h3>
+          <p>Estrategias de ahorro e inversión que protegen tu capital de la inflación y lo hacen crecer.</p>
+        </article>
+        <article class="benefit-card">
+          <span class="card-icon-box card-icon-box-dark">🔄</span>
+          <h3>Flexibilidad en tus retiros</h3>
+          <p>Realiza retiros parciales de tu capital cuando lo necesites, sin renunciar a tu plan de retiro ni a los beneficios que ya has construido.</p>
+        </article>
+        <article class="benefit-card">
+          <span class="card-icon-box card-icon-box-dark">💰</span>
+          <h3>Beneficios fiscales cada año</h3>
+          <p>Los planes de retiro te permiten deducir impuestos mientras ahorras para tu futuro.</p>
+        </article>
+      </div>
+      <a href="#contacto" class="btn btn-primary">Quiero construir mi patrimonio →</a>
+    </div>
+  </section>
+
+  <!-- Testimonios -->
+  <section class="section section-soft" id="testimonios">
+    <div class="container section-centered">
+      <span class="section-pill">LO QUE DICEN MIS CLIENTES</span>
+      <h2 class="section-title">Familias que decidieron <em>tomar el control</em> de su futuro</h2>
+      <div class="section-divider"></div>
+      <div class="cards-3">
+        <article class="card testimonial">
+          <div class="stars">★★★★★</div>
+          <p>“Lo que más me convenció es que puedo acceder a mi dinero cuando lo necesito y, al mismo tiempo, ahorrar en impuestos. Ricardo me lo explicó con claridad y hoy tengo un plan a mi medida.”</p>
+          <div class="client">
+            <span class="avatar">M</span>
+            <div><strong>María G.</strong><small>Comerciante</small></div>
+          </div>
+        </article>
+        <article class="card testimonial">
+          <div class="stars">★★★★★</div>
+          <p>“Siempre decía ‘después empiezo a ahorrar’. Ricardo me mostró que esperar me costaba más que empezar hoy. Fue la mejor decisión.”</p>
+          <div class="client">
+            <span class="avatar">J</span>
+            <div><strong>Jorge R.</strong><small>Profesionista independiente</small></div>
+          </div>
+        </article>
+        <article class="card testimonial">
+          <div class="stars">★★★★★</div>
+          <p>“Lo que más me convenció fue el trato personal. No me vendió un producto, diseñó un plan para mi familia y mis metas.”</p>
+          <div class="client">
+            <span class="avatar">A</span>
+            <div><strong>Ana L.</strong><small>Madre de familia</small></div>
+          </div>
+        </article>
+      </div>
+      <a href="#contacto" class="btn btn-primary section-cta">Quiero mi consulta gratuita →</a>
+    </div>
+  </section>
+
+  <!-- Quién soy -->
+  <section class="section section-navy" id="quien-soy">
+    <div class="container about-grid">
+      <div class="about-photo">
+        <img src="assets/ricardo.png" alt="Ricardo Diaz, asesor financiero, en su oficina" class="about-img" />
+      </div>
+      <div class="about-copy">
+        <span class="eyebrow gold">QUIÉN SOY</span>
+        <h2 class="section-title left light">Ricardo Diaz</h2>
+        <p class="role">Asesor Financiero · Retiro e Inversiones</p>
+        <p>
+          Ayudo a familias y profesionistas a proteger su patrimonio, construir
+          estabilidad financiera y tomar decisiones inteligentes para su futuro
+          mediante estrategias personalizadas de retiro e inversión.
+        </p>
+        <div class="mission-vision">
+          <div class="mv-card">
+            <h3>Misión</h3>
+            <p>Brindar soluciones financieras personalizadas que protejan el patrimonio y aseguren el futuro de nuestros clientes. A través de asesoría experta en inversiones y planes de retiro, ayudamos a construir estabilidad y tranquilidad financiera con estrategias adaptadas a cada necesidad.</p>
+          </div>
+          <div class="mv-card">
+            <h3>Visión</h3>
+            <p>Ser el referente en asesoría financiera integral, ofreciendo productos innovadores y estrategias sólidas que permitan a nuestros clientes alcanzar sus metas de inversión, protección y bienestar. Buscamos transformar la manera en que las personas planifican su futuro, promoviendo educación financiera y confianza en cada decisión.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <p>📍 Oficina: Cjón. Oaxaca y 26, Plaza Eliza, Local 8, 2do piso.</p>
+        <p>📞 <a href="tel:+526531038410">+52 (653) 103-8410</a></p>
+        <p>✉️ <a href="mailto:ricardodiaztuasesorfinanciero@gmail.com">ricardodiaztuasesorfinanciero@gmail.com</a></p>
+        <p class="footer-copy">© 2026 Asesor Financiero</p>
+      </div>
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Ricardo Diaz — Tu asesor financiero" class="footer-logo-img" width="220" height="100" />
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
