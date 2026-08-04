@@ -36,6 +36,7 @@ function validarFormulario(form) {
   const telefono = form.elements.telefono.value.replace(/[\s()-]/g, "");
   const edad = valorRadio(form, "edad");
   const ahorro = valorRadio(form, "ahorro");
+  const rangoAhorro = valorRadio(form, "rango-ahorro");
 
   let nombreValido;
   if (!nombre) {
@@ -67,10 +68,36 @@ function validarFormulario(form) {
     ? mostrarError(form, "ahorro", "")
     : mostrarError(form, "ahorro", "Selecciona una opción.");
 
-  return nombreValido && telefonoValido && edadValido && ahorroValido;
+  let rangoValido = true;
+  if (ahorro === "Sí") {
+    rangoValido = rangoAhorro
+      ? mostrarError(form, "rango-ahorro", "")
+      : mostrarError(form, "rango-ahorro", "Selecciona un rango de ahorro.");
+  } else {
+    mostrarError(form, "rango-ahorro", "");
+  }
+
+  return nombreValido && telefonoValido && edadValido && ahorroValido && rangoValido;
 }
 
 const form = document.getElementById("lead-form");
+const rangoAhorroGroup = document.getElementById("rango-ahorro-group");
+
+function toggleRangoAhorro() {
+  const puedeAhorrar = valorRadio(form, "ahorro");
+  const mostrarRango = puedeAhorrar === "Sí";
+
+  if (rangoAhorroGroup) {
+    rangoAhorroGroup.hidden = !mostrarRango;
+  }
+
+  if (!mostrarRango) {
+    form.querySelectorAll('input[name="rango-ahorro"]').forEach((radio) => {
+      radio.checked = false;
+    });
+    mostrarError(form, "rango-ahorro", "");
+  }
+}
 
 ["nombre", "telefono"].forEach((campo) => {
   form.elements[campo].addEventListener("input", () => mostrarError(form, campo, ""));
@@ -78,8 +105,15 @@ const form = document.getElementById("lead-form");
 
 ["edad", "ahorro"].forEach((campo) => {
   form.querySelectorAll(`input[name="${campo}"]`).forEach((radio) => {
-    radio.addEventListener("change", () => mostrarError(form, campo, ""));
+    radio.addEventListener("change", () => {
+      mostrarError(form, campo, "");
+      if (campo === "ahorro") toggleRangoAhorro();
+    });
   });
+});
+
+form.querySelectorAll('input[name="rango-ahorro"]').forEach((radio) => {
+  radio.addEventListener("change", () => mostrarError(form, "rango-ahorro", ""));
 });
 
 form.addEventListener("submit", function (e) {
@@ -92,6 +126,7 @@ form.addEventListener("submit", function (e) {
   const telefono = form.elements.telefono.value.replace(/[\s()-]/g, "");
   const edad = valorRadio(form, "edad");
   const ahorro = valorRadio(form, "ahorro");
+  const rangoAhorro = valorRadio(form, "rango-ahorro");
 
   boton.disabled = true;
   boton.textContent = "Enviando…";
@@ -109,7 +144,8 @@ form.addEventListener("submit", function (e) {
       Nombre: nombre,
       WhatsApp: telefono,
       Edad: edad,
-      "Capacidad de ahorro": ahorro,
+      "¿Puedes ahorrar en estos momentos?": ahorro,
+      "Rango de ahorro mensual": ahorro === "Sí" ? rangoAhorro : "No aplica",
     }),
   })
     .then((res) => {
@@ -127,3 +163,73 @@ form.addEventListener("submit", function (e) {
       }, 4000);
     });
 });
+
+// ============ Simulador ============
+(function initSimulador() {
+  const sliderMonto = document.getElementById("sim-monto");
+  const sliderPlazo = document.getElementById("sim-plazo");
+  if (!sliderMonto || !sliderPlazo) return;
+
+  const dispMonto = document.getElementById("sim-d-monto");
+  const dispPlazo = document.getElementById("sim-d-plazo");
+  const barTrad = document.getElementById("sim-bar-trad");
+  const barPlan = document.getElementById("sim-bar-plan");
+  const numTrad = document.getElementById("sim-num-trad");
+  const numPlan = document.getElementById("sim-num-plan");
+  const penTrad = document.getElementById("sim-pen-trad");
+  const penPlan = document.getElementById("sim-pen-plan");
+  const diffAmt = document.getElementById("sim-diff-amt");
+  const urgAmt = document.getElementById("sim-urg-amt");
+  const MAX_H = 100;
+
+  const RATE_TRAD = 0.03;
+  const RATE_PLAN = 0.11;
+
+  function fv(pmt, annualRate, years) {
+    const r = annualRate / 12;
+    const n = Math.max(1, years) * 12;
+    if (r === 0) return pmt * n;
+    return pmt * ((Math.pow(1 + r, n) - 1) / r);
+  }
+
+  function fmt(n) {
+    if (n >= 1e6) {
+      return "$" + (n / 1e6).toFixed(2).replace(/\.?0+$/, "") + " millones";
+    }
+    return "$" + Math.round(n).toLocaleString("es-MX");
+  }
+
+  function fmtPen(n) {
+    return "Pensión est. $" + Math.round((n * 0.04) / 12).toLocaleString("es-MX") + "/mes";
+  }
+
+  function calc() {
+    const monto = Number(sliderMonto.value);
+    const plazo = Number(sliderPlazo.value);
+
+    dispMonto.textContent = "$" + monto.toLocaleString("es-MX");
+    dispPlazo.textContent = String(plazo);
+    sliderMonto.setAttribute("aria-valuenow", String(monto));
+    sliderPlazo.setAttribute("aria-valuenow", String(plazo));
+
+    const trad = fv(monto, RATE_TRAD, plazo);
+    const plan = fv(monto, RATE_PLAN, plazo);
+
+    barPlan.style.height = MAX_H + "px";
+    barTrad.style.height = Math.max(6, Math.round((MAX_H * trad) / plan)) + "px";
+
+    numTrad.textContent = fmt(trad);
+    numPlan.textContent = fmt(plan);
+    penTrad.textContent = fmtPen(trad);
+    penPlan.textContent = fmtPen(plan);
+
+    diffAmt.textContent = fmt(plan - trad);
+
+    const planWait = fv(monto, RATE_PLAN, Math.max(1, plazo - 5));
+    urgAmt.textContent = fmt(plan - planWait);
+  }
+
+  sliderMonto.addEventListener("input", calc);
+  sliderPlazo.addEventListener("input", calc);
+  calc();
+})();

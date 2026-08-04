@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ricardo Diaz · Asesor Financiero — Planes de Retiro</title>
   <meta name="description" content="Asesoría financiera personalizada en planes de retiro, inversiones y ahorro patrimonial. Ricardo Diaz, tu asesor financiero de confianza." />
-  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png?v=2" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png?v=2" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png?v=2" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=8" />
 </head>
 <body>
 
@@ -31,11 +31,14 @@
         Ahorra para tu futuro de manera cómoda, flexible y sin riesgos, con beneficios
         fiscales y acceso a tu capital cuando lo necesites.
       </p>
-      <a href="#contacto" class="btn btn-primary">Quiero conocer mi plan →</a>
+      <div class="hero-cta-row">
+        <a href="#contacto" class="btn btn-primary">Quiero conocer mi plan →</a>
+        <a href="#simulador" class="btn btn-outline-light">Simulador</a>
+      </div>
       <div class="hero-stats">
         <div class="stat">
-          <strong>20</strong>
-          <span>Años de experiencia</span>
+          <strong>+20</strong>
+          <span>Años de experiencia en promotoría</span>
         </div>
         <div class="stat">
           <strong>+2,000</strong>
@@ -44,6 +47,73 @@
         <div class="stat">
           <strong>100%</strong>
           <span>Estrategias personalizadas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulador -->
+  <section class="section section-white" id="simulador">
+    <div class="container simulator-container">
+      <div class="simulator-header">
+        <span class="section-pill">PROYECTA TU RETIRO</span>
+        <h2 class="section-title simulator-title">Simulador</h2>
+        <p class="section-subtitle simulator-subtitle">
+          Mueve los controles y compara cuánto podrías acumular con tu plan frente al ahorro tradicional.
+        </p>
+      </div>
+
+      <div class="simulator-box">
+        <div class="simulator-top">
+          <div class="simulator-sliders">
+            <div class="sim-field">
+              <label for="sim-monto">Aportación mensual</label>
+              <div class="sim-val" id="sim-d-monto">$4,000</div>
+              <input type="range" class="sim-slider" id="sim-monto"
+                     min="2000" max="15000" value="4000" step="500"
+                     aria-valuemin="2000" aria-valuemax="15000" aria-valuenow="4000" />
+            </div>
+            <div class="sim-field">
+              <label for="sim-plazo">Plazo del plan</label>
+              <div class="sim-val"><span id="sim-d-plazo">20</span> años</div>
+              <input type="range" class="sim-slider" id="sim-plazo"
+                     min="15" max="25" value="20" step="1"
+                     aria-valuemin="15" aria-valuemax="25" aria-valuenow="20" />
+            </div>
+          </div>
+        </div>
+
+        <div class="simulator-results">
+          <div class="sim-compare">
+            <div class="sim-col sim-col-trad">
+              <div class="sim-col-lbl">Ahorro tradicional · 3% anual</div>
+              <div class="sim-bar-wrap">
+                <div class="sim-bar" id="sim-bar-trad"></div>
+              </div>
+              <div class="sim-num" id="sim-num-trad">—</div>
+              <div class="sim-pen" id="sim-pen-trad">—</div>
+            </div>
+            <div class="sim-col sim-col-plan">
+              <div class="sim-col-lbl">Con tu plan · 11% anual est.</div>
+              <div class="sim-bar-wrap">
+                <div class="sim-bar" id="sim-bar-plan"></div>
+              </div>
+              <div class="sim-num" id="sim-num-plan">—</div>
+              <div class="sim-pen" id="sim-pen-plan">—</div>
+            </div>
+          </div>
+
+          <p class="sim-diff">
+            Con tu plan acumularías <strong id="sim-diff-amt">—</strong> más que ahorrando de forma tradicional.
+          </p>
+
+          <p class="sim-urgency">
+            Si esperas 5 años más para empezar, perderías aproximadamente <strong id="sim-urg-amt">—</strong>.
+          </p>
+
+          <div class="sim-cta">
+            <a href="#contacto" class="btn btn-primary btn-full">Quiero este resultado para mí →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -94,7 +164,7 @@
           </fieldset>
 
           <fieldset class="radio-group" data-field="ahorro">
-            <legend>¿Cuentas con capacidad de ahorro?</legend>
+            <legend>¿Puedes ahorrar en estos momentos?</legend>
             <div class="radio-options">
               <label class="radio-label">
                 <input type="radio" name="ahorro" value="Sí" />
@@ -106,6 +176,29 @@
               </label>
             </div>
             <span class="field-error" data-error-for="ahorro"></span>
+          </fieldset>
+
+          <fieldset class="radio-group radio-group-nested" data-field="rango-ahorro" id="rango-ahorro-group" hidden>
+            <legend>¿Cuánto podrías ahorrar al mes?</legend>
+            <div class="radio-options radio-options-stack">
+              <label class="radio-label">
+                <input type="radio" name="rango-ahorro" value="$2,000 – $3,000" />
+                <span>$2,000 – $3,000</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="rango-ahorro" value="$3,000 – $5,000" />
+                <span>$3,000 – $5,000</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="rango-ahorro" value="$5,000 – $9,000" />
+                <span>$5,000 – $9,000</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="rango-ahorro" value="$9,000 o más" />
+                <span>$9,000 o más</span>
+              </label>
+            </div>
+            <span class="field-error" data-error-for="rango-ahorro"></span>
           </fieldset>
 
           <button type="submit" class="btn btn-submit btn-full">Cotizar mi plan de retiro</button>
@@ -133,8 +226,8 @@
       </p>
       <div class="section-divider"></div>
       <div class="video-placeholder" id="video-container">
-        <video controls playsinline preload="auto" title="Video explicativo — Plan de retiro">
-          <source src="assets/video.mp4" type="video/mp4" />
+        <video controls playsinline preload="metadata" title="Video explicativo — Plan de retiro">
+          <source src="assets/video.mp4?v=3" type="video/mp4" />
           Tu navegador no soporta la reproducción de video.
         </video>
       </div>
@@ -235,7 +328,7 @@
   <section class="section section-navy" id="quien-soy">
     <div class="container about-grid">
       <div class="about-photo">
-        <img src="assets/ricardo.png" alt="Ricardo Diaz, asesor financiero, en su oficina" class="about-img" />
+        <img src="assets/ricardo.png?v=2" alt="Ricardo Diaz, asesor financiero, en su oficina" class="about-img" />
       </div>
       <div class="about-copy">
         <span class="eyebrow gold">QUIÉN SOY</span>
@@ -270,11 +363,11 @@
         <p class="footer-copy">© 2026 Asesor Financiero</p>
       </div>
       <div class="footer-brand">
-        <img src="assets/logo.png" alt="Ricardo Diaz — Tu asesor financiero" class="footer-logo-img" width="220" height="100" />
+        <img src="assets/logo.png?v=2" alt="Ricardo Diaz — Tu asesor financiero" class="footer-logo-img" width="220" height="100" />
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js?v=3"></script>
 </body>
 </html>

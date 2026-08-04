@@ -1,7 +1,38 @@
 AddType video/mp4 .mp4
 
+# Compresión para texto (CSS, JS, HTML)
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain application/javascript application/json image/svg+xml
+</IfModule>
+
+# Caché del navegador
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 hour"
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType video/mp4 "access plus 1 year"
+</IfModule>
+
 <IfModule mod_headers.c>
+  # HTML siempre revalidar (cambios se ven al subir)
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+
+  # Assets estáticos: caché larga (usar ?v= en index al actualizar)
+  <FilesMatch "\.(css|js|png|jpg|jpeg|webp|ico|svg|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Video: caché larga + permitir adelantar/retroceder
   <FilesMatch "\.(mp4|webm)$">
     Header set Accept-Ranges bytes
+    Header set Cache-Control "public, max-age=31536000"
   </FilesMatch>
 </IfModule>
